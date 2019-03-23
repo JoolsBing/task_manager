@@ -1,4 +1,5 @@
 <?php 
+session_start();
 $email = $_POST['email'];
 $password = $_POST['password'];
 
@@ -17,6 +18,7 @@ $users = $stmt->fetch(PDO::FETCH_OBJ);
 
 if($users) {
     if(password_verify($password, $users->password)) {
+        $_SESSION['user_email'] = $email;
         header('Location: list.php');
     }else{
         echo "Неверный логин или пароль";
