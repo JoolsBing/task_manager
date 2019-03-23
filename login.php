@@ -24,13 +24,3 @@ if ($users) {
 }else {
     echo "Неверный логин или пароль";
 }
-
-
-
-/*  $sql = 'SELECT * FROM tm';
-$stmt = $pdo->query($sql);
-$res = $stmt->fetchAll(PDO::FETCH_ASSOC);
-foreach ($res as $key) {
-
-    var_dump($key);
-} */
