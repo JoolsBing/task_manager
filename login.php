@@ -15,7 +15,7 @@ $stmt = $pdo->prepare($sql);
 $stmt->execute([':email' => $email]);
 $users = $stmt->fetch(PDO::FETCH_OBJ);
 
-if ($users) {
+if($users) {
     if(password_verify($password, $users->password)) {
         header('Location: list.php');
     }else{
