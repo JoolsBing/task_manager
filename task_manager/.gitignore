@@ -7,14 +7,13 @@
 *.swo
 *.swp
 *.vi
-*.ini
+*.git
 *~
 *.sass-cache
 node_modules/
 app/bower/
 .tmp/
 .idea/
-first/
 
 # OS or Editor folders
 .DS_Store
