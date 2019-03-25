@@ -1,13 +1,17 @@
 <?php 
 
-move_uploaded_file($_FILES['file']['tmp_name'], 'upload/'. $_FILES['file']['name']);
 $title_name = $_POST['title_name'];
 $description = $_POST['description'];
 $upload_address = "/upload/". $_FILES['file']['name'];
 
 if(empty($title_name)){
-    echo "Вы недали название новой записи!";
+    echo "Вы не дали название новой записи!";
     exit;
+}
+if(isset($_FILES)){
+    move_uploaded_file($_FILES['file']['tmp_name'], 'upload/'. $_FILES['file']['name']);
+}else{
+    echo "Файл не загружен!";
 }
 
 $pdo = new PDO('mysql:host=localhost;dbname=test_data','root','');

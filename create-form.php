@@ -27,7 +27,7 @@
         <img class="mb-4" src="assets/img/bootstrap-solid.svg" alt="" width="72" height="72">
         <h1 class="h3 mb-3 font-weight-normal">Добавить запись</h1>
         <label for="inputEmail" class="sr-only">Название</label>
-        <input type="text" id="inputEmail" class="form-control" name="title_name" placeholder="Название" required>
+        <input type="text" id="inputEmail" class="form-control" name="title_name" placeholder="Название" >
         <label for="inputEmail" class="sr-only">Описание</label>
         <textarea name="description" class="form-control" cols="30" rows="10" placeholder="Описание"></textarea>
         <input type="file" name="file">
