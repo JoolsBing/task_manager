@@ -4,6 +4,12 @@
     header('Location: login-form.php');
     exit;
   }
+
+  $pdo = new PDO('mysql:host=localhost;dbname=test_data','root','');
+  $sql = 'SELECT title_name,description,upload_address FROM tasks WHERE user_email = :user_email';
+  $stmt = $pdo->prepare($sql);
+  $stmt->execute([':user_email' => $_SESSION['user_email']]);
+  $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <!doctype html>
 <html lang="en">
@@ -65,36 +71,25 @@
         <div class="container">
 
           <div class="row">
+
+          <?php foreach ($result as $tasks):?>
              <div class="col-md-4">
               <div class="card mb-4 shadow-sm">
-                <img class="card-img-top" src="assets/img/no-image.jpg">
+                <img class="card-img-top" src="<?php echo $tasks['upload_address'];?>">
                 <div class="card-body">
-                  <p class="card-text">Lorem ipsum</p>
+                  <p class="card-text"><?php echo $tasks['title_name'];?></p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                      <a href="#" class="btn btn-sm btn-outline-secondary">Подробнее</a>
-                      <a href="#" class="btn btn-sm btn-outline-secondary">Изменить</a>
-                      <a href="#" class="btn btn-sm btn-outline-secondary" onclick="confirm('are you sure?')">Удалить</a>
+                      <a href="show.php?id=<?php echo $tasks['user_email'];?>" class="btn btn-sm btn-outline-secondary">Подробнее</a>
+                      <a href="edit-form.php?id=<?php echo $tasks['user_email'];?>">Изменить</a>
+                      <a href="delete.php?id=<?php echo $tasks['user_email'];?>" onclick="confirm('are you sure?')">Удалить</a>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <!-- <div class="col-md-4">
-              <div class="card mb-4 shadow-sm">
-                <img class="card-img-top" src="assets/img/no-image.jpg">
-                <div class="card-body">
-                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <a href="#" class="btn btn-sm btn-outline-secondary">Просмотреть</a>
-                      <a href="#" class="btn btn-sm btn-outline-secondary">Изменить</a>
-                      <a href="#" class="btn btn-sm btn-outline-secondary">Удалить</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div> -->
+            <?php endforeach;?>
+            
             <!-- <div class="col-md-4">
               <div class="card mb-4 shadow-sm">
                 <img class="card-img-top" src="assets/img/no-image.jpg">
