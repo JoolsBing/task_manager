@@ -8,7 +8,7 @@ if(!isset($_SESSION['user_email'])){
 
 $title_name = $_POST['title_name'];
 $description = $_POST['description'];
-$upload_address = 'uploads/'. $_FILES['file']['name'];
+$upload_address = $_FILES['file']['name'];
 
 if(empty($title_name)){
     echo "Вы не дали название новой записи!";
@@ -23,7 +23,7 @@ if(isset($_FILES)){
 $pdo = new PDO('mysql:host=localhost;dbname=test_data','root','');
 $sql = 'INSERT INTO tasks(title_name,description,upload_address,user_email) VALUES(:title_name,:description,:upload_address,:user_email)';
 $stmt = $pdo->prepare($sql);
-$result = $stmt->execute([':title_name' => $title_name, ':description' => $description, ':upload_address' => $upload_address, ':user_email' => $_SESSION['user_email']]);
+$result = $stmt->execute([":title_name" => $title_name, ":description" => $description, ":upload_address" => $upload_address, ":user_email" => $_SESSION['user_email']]);
 
 if(!$result){
     echo "Ошибка при добавления записи!";

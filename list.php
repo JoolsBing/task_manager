@@ -6,7 +6,7 @@
   }
 
   $pdo = new PDO('mysql:host=localhost;dbname=test_data','root','');
-  $sql = 'SELECT title_name,description,upload_address FROM tasks WHERE user_email = :user_email';
+  $sql = 'SELECT title_name,description,upload_address,id FROM tasks WHERE user_email = :user_email';
   $stmt = $pdo->prepare($sql);
   $stmt->execute([':user_email' => $_SESSION['user_email']]);
   $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -75,14 +75,14 @@
           <?php foreach ($result as $tasks):?>
              <div class="col-md-4">
               <div class="card mb-4 shadow-sm">
-                <img class="card-img-top" src="<?php echo $tasks['upload_address'];?>">
+                <img class="card-img-top" src="<?php echo 'uploads/'.$tasks['upload_address'];?>">
                 <div class="card-body">
                   <p class="card-text"><?php echo $tasks['title_name'];?></p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                      <a href="show.php?id=<?php echo $tasks['user_email'];?>" class="btn btn-sm btn-outline-secondary">Подробнее</a>
-                      <a href="edit-form.php?id=<?php echo $tasks['user_email'];?>">Изменить</a>
-                      <a href="delete.php?id=<?php echo $tasks['user_email'];?>" onclick="confirm('are you sure?')">Удалить</a>
+                      <a href="show.php?id=<?php echo $tasks['id'];?>" class="btn btn-sm btn-outline-secondary">Подробнее</a>
+                      <a href="edit-form.php?id=<?php echo $tasks['id'];?>">Изменить</a>
+                      <a href="delete.php?id=<?php echo $tasks['id'];?>" onclick="confirm('are you sure?')">Удалить</a>
                     </div>
                   </div>
                 </div>
