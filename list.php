@@ -82,7 +82,7 @@
                     <div class="btn-group">
                       <a href="show.php?id=<?php echo $tasks['id'];?>" class="btn btn-sm btn-outline-secondary">Подробнее</a>
                       <a href="edit-form.php?id=<?php echo $tasks['id'];?>">Изменить</a>
-                      <a href="delete.php?id=<?php echo $tasks['id'];?>" onclick="confirm('are you sure?')">Удалить</a>
+                      <a href="delete.php?id=<?php echo $tasks['id'];?>" >Удалить</a>
                     </div>
                   </div>
                 </div>
