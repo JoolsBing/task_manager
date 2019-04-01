@@ -1,10 +1,10 @@
 <?php
-
 session_start();
 if(!isset($_SESSION['user_email'])){
-    header('Location: list.php');
+    header('Location: login-form.php');
     exit;
 }
+
 $id = $_GET['id'];
 
 $pdo = new PDO('mysql:host=localhost;dbname=test_data', 'root','');

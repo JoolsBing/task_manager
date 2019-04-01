@@ -1,5 +1,4 @@
 <?php 
-session_start();
 $email = $_POST['email'];
 $password = $_POST['password'];
 
@@ -18,6 +17,8 @@ $users = $stmt->fetch(PDO::FETCH_OBJ);
 
 if($users) {
     if(password_verify($password, $users->password)) {
+        // Сессия запустилась
+        session_start();
         $_SESSION['user_email'] = $email;
         header('Location: list.php');
     }else{

@@ -12,8 +12,8 @@ $sql = 'SELECT * FROM tasks WHERE id = :id';
 $stmt = $pdo->prepare($sql);
 $stmt->execute([':id' => $id]);
 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-var_dump($result);
 ?>
+
 <!doctype html>
 <html lang="en">
   <head>

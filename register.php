@@ -19,7 +19,6 @@ $stmt = $pdo->prepare($sql);
 $stmt->execute([':email' => $email]);
 $users = $stmt->fetchColumn();
 
-
 if($users){
     $errMes = "Животное с таким e-mail уже существует!";
     include 'errors.php';

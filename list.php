@@ -6,7 +6,7 @@
   }
 
   $pdo = new PDO('mysql:host=localhost;dbname=test_data','root','');
-  $sql = 'SELECT title_name,description,upload_address,id FROM tasks WHERE user_email = :user_email';
+  $sql = 'SELECT * FROM tasks WHERE user_email = :user_email';
   $stmt = $pdo->prepare($sql);
   $stmt->execute([':user_email' => $_SESSION['user_email']]);
   $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
