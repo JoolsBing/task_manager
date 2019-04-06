@@ -1,17 +1,10 @@
 <?php 
-session_start();
-if(!isset($_SESSION['user_email'])){
-  header('Location: login-form.php');
-  exit;
-}
+include 'funs.php';
+checkSes();
 
 $id = $_GET['id'];
 
-$pdo = new PDO('mysql:host=localhost;dbname=test_data','root','');
-$sql = 'SELECT * FROM tasks WHERE id = :id';
-$stmt = $pdo->prepare($sql);
-$stmt->execute([':id' => $id]);
-$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+pdoSelect($id);
 ?>
 
 <!doctype html>
@@ -32,7 +25,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
   <body>
     <div class="form-wrapper text-center">
-  <?php foreach ($result as $tasks):?>
+  <?php foreach (pdoSelect($id) as $tasks):?>
       <form class="form-signin" action="edit.php?id=<?php echo $tasks['id'];?>" method="POST" enctype="multipart/form-data">
         <img class="mb-4" src="assets/img/bootstrap-solid.svg" alt="" width="72" height="72">
         <h1 class="h3 mb-3 font-weight-normal">Добавить запись</h1>

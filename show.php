@@ -1,17 +1,11 @@
 <?php
-session_start();
-if(!isset($_SESSION['user_email'])){
-  header('Location: login-form.php');
-  exit;
-}
+
+require 'funs.php';
+checkSes();
 
 $id = $_GET['id'];
 
-$pdo = new PDO('mysql:host=localhost;dbname=test_data','root','');
-$sql = 'SELECT * FROM tasks WHERE id = :id';
-$stmt = $pdo->prepare($sql);
-$stmt->execute([':id' => $id]);
-$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+pdoSelect($id);
 ?>
 
 <!doctype html>
@@ -33,7 +27,8 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
   <body>
     <div class="form-wrapper text-center">
-      <?php foreach ($result as $tasks):?>
+    
+    <?php foreach (pdoSelect($id) as $tasks):?>
       <img src="<?php echo 'uploads/'.$tasks['upload_address'];?>" alt="" width="400">
       <h2><?php echo $tasks['title_name'];?></h2>
       <p>

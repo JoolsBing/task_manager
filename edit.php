@@ -1,11 +1,8 @@
 <?php 
-session_start();
-if(!isset($_SESSION['user_email'])){
-  header('Location: login-form.php');
-  exit;
-}
+include 'funs.php';
+checkSes();
 
-if(isset($_POST['title_name'])){
+if(!empty($_POST['title_name'])){
   $title_name = $_POST['title_name'];
 }else{
   $errMes = "Вы не ввели название записи!";

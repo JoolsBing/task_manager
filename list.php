@@ -1,9 +1,6 @@
 <?php
-  session_start();
-  if(!isset($_SESSION['user_email'])){
-    header('Location: login-form.php');
-    exit;
-  }
+  include 'funs.php';
+  checkSes();
 
   $pdo = new PDO('mysql:host=localhost;dbname=test_data','root','');
   $sql = 'SELECT * FROM tasks WHERE user_email = :user_email';
@@ -34,7 +31,7 @@
               <p class="text-muted">Add some information about the album below, the author, or any other background context. Make it a few sentences long so folks can pick up some informative tidbits. Then, link them off to some social networking sites or contact information.</p>
             </div>
             <div class="col-sm-4 offset-md-1 py-4">
-              <h4 class="text-white">john@example.com</h4>
+              <h4 class="text-white"><?php echo $_SESSION['user_email'] ?></h4>
               <ul class="list-unstyled">
                 <li><a href="logout.php" class="text-white">Выйти</a></li>
               </ul>

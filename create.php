@@ -1,9 +1,6 @@
 <?php 
-session_start();
-if(!isset($_SESSION['user_email'])){
-  header('Location: login-form.php');
-  exit;
-}
+include 'funs.php';
+checkSes();
 
 $title_name = $_POST['title_name'];
 $description = $_POST['description'];
@@ -23,12 +20,6 @@ if(!empty($_FILES)){
 $pdo = new PDO('mysql:host=localhost;dbname=test_data','root','');
 $sql = 'INSERT INTO tasks(title_name,description,upload_address,user_email) VALUES(:title_name,:description,:upload_address,:user_email)';
 $stmt = $pdo->prepare($sql);
-$result = $stmt->execute([":title_name" => $title_name, ":description" => $description, ":upload_address" => $upload_address, ":user_email" => $_SESSION['user_email']]);
+$result = $stmt->execute([":title_name" => $title_sname, ":description" => $description, ":upload_address" => $upload_address, ":user_email" => $_SESSION['user_email']]);
 
-if(!$result){
-    $errMes = "Ошибка при добавления записи!";
-    include 'errors.php';
-    exit;
-}else {
-    header('Location: list.php');
-}
+erroMes("при добавления записи","list"); // Проверка

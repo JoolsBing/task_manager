@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 $username = $_POST['username'];
 $password = $_POST['password'];
@@ -27,14 +28,7 @@ if($users){
 
 $sql = 'INSERT INTO test (username,password,email) VALUES(:username,:password,:email)';
 $stmt = $pdo->prepare($sql);
-$res = $stmt->execute([':username' => $username, ':password' => $password,':email' => $email]);
+$result = $stmt->execute([':username' => $username, ':password' => $password,':email' => $email]);
 
-if(!$res){
-    $errMes = "Ошибка регистрации!";
-    include 'errors.php';
-    exit;
-}
-else{
-    header('Location: login-form.php');
-    exit;
-}
+require 'funs.php';
+erroMes("регистрации"); // Проверка 
