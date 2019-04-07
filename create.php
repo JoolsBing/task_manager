@@ -1,5 +1,6 @@
 <?php 
-include 'funs.php';
+require 'funs.php';
+require 'con_pdo.php';
 checkSes();
 
 $title_name = $_POST['title_name'];
@@ -17,9 +18,16 @@ if(!empty($_FILES)){
     echo "Файл не загружен!";
 }
 
-$pdo = new PDO('mysql:host=localhost;dbname=test_data','root','');
 $sql = 'INSERT INTO tasks(title_name,description,upload_address,user_email) VALUES(:title_name,:description,:upload_address,:user_email)';
 $stmt = $pdo->prepare($sql);
-$result = $stmt->execute([":title_name" => $title_sname, ":description" => $description, ":upload_address" => $upload_address, ":user_email" => $_SESSION['user_email']]);
+$result = $stmt->execute([":title_name" => $title_name, ":description" => $description, ":upload_address" => $upload_address, ":user_email" => $_SESSION['user_email']]);
 
-erroMes("при добавления записи","list"); // Проверка
+if(!$result){
+    $errMes = "Ошибка !";
+    include 'errors.php';
+    exit;
+}
+else{
+    header("Location: list.php");
+    exit;
+}

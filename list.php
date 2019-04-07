@@ -1,8 +1,8 @@
 <?php
-  include 'funs.php';
-  checkSes();
+require 'funs.php';
+require 'con_pdo.php';
+checkSes();
 
-  $pdo = new PDO('mysql:host=localhost;dbname=test_data','root','');
   $sql = 'SELECT * FROM tasks WHERE user_email = :user_email';
   $stmt = $pdo->prepare($sql);
   $stmt->execute([':user_email' => $_SESSION['user_email']]);

@@ -1,5 +1,5 @@
 <?php
-  include 'funs.php';
+  require 'funs.php';
   checkSes();
 ?>
 <!doctype html>

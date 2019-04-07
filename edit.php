@@ -1,5 +1,6 @@
 <?php 
 include 'funs.php';
+require 'con_pdo.php';
 checkSes();
 
 if(!empty($_POST['title_name'])){
@@ -13,7 +14,6 @@ if(!empty($_POST['title_name'])){
 $description = $_POST['description'];
 $id = $_GET['id'];
 
-$pdo = new PDO('mysql:host=localhost;dbname=test_data','root','');
 $sql = 'SELECT * FROM tasks WHERE id = :id';
 $stmt = $pdo->prepare($sql);
 $stmt->execute([':id' => $id]);

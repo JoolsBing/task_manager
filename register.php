@@ -1,5 +1,5 @@
 <?php
-
+require 'con_pdo.php';
 session_start();
 $username = $_POST['username'];
 $password = $_POST['password'];
@@ -14,7 +14,6 @@ foreach ($_POST as $key) {
     }
 }
 
-$pdo = new PDO('mysql:host=localhost;dbname=test_data','root','');
 $sql = 'SELECT id FROM test WHERE email=:email';
 $stmt = $pdo->prepare($sql);
 $stmt->execute([':email' => $email]);

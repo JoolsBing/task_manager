@@ -1,11 +1,10 @@
 <?php
-
 require 'funs.php';
+require 'con_pdo.php';
 checkSes();
 
 $id = $_GET['id'];
-
-pdoSelect($id);
+$task = getTask($pdo,$id);
 ?>
 
 <!doctype html>
@@ -27,17 +26,14 @@ pdoSelect($id);
 
   <body>
     <div class="form-wrapper text-center">
-    
-    <?php foreach (pdoSelect($id) as $tasks):?>
-      <img src="<?php echo 'uploads/'.$tasks['upload_address'];?>" alt="" width="400">
-      <h2><?php echo $tasks['title_name'];?></h2>
+      <img src="<?php echo 'uploads/'.$task['upload_address'];?>" alt="" width="400">
+      <h2><?php echo $task['title_name'];?></h2>
       <p>
-        <?php echo $tasks['description'];?>
+        <?php echo $task['description'];?>
       </p>
-      <a href="edit-form.php?id=<?php echo $tasks['id'];?>">Изменить</a>
-      <a href="delete.php?id=<?php echo $tasks['id'];?>" >Удалить</a>
+      <a href="edit-form.php?id=<?php echo $task['id'];?>">Изменить</a>
+      <a href="delete.php?id=<?php echo $task['id'];?>" >Удалить</a>
       <a href="list.php">На главную</a>
-      <?php endforeach;?>
     </div>
   </body>
 </html>

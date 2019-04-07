@@ -1,8 +1,10 @@
 <?php
+include 'funs.php';
 session_start();
-if(isset($_SESSION['user_email'])){
-  header('Location: list.php');
-}
+    if(isset($_SESSION['user_email'])){
+        header('Location: list.php');
+        exit;
+  }
 ?>
 <!doctype html>
 <html lang="en">
